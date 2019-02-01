@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 /**
  * 山商品实体类
- * Created by wangqian on 2019/1/26.
+ * Created by wang qian on 2019/1/26.
  */
 @Entity
 @Data

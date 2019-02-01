@@ -1,6 +1,6 @@
 package com.wrq.service.impl;
 
-import com.wrq.common.ProductStatusEnum;
+import com.wrq.enums.ProductStatusEnum;
 import com.wrq.entity.ProductInfo;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,13 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by wangqian on 2019/1/26.

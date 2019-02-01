@@ -1,11 +1,10 @@
 package com.wrq.controller;
 
-import com.wrq.common.ResponseCode;
+import com.wrq.common.ServerResponse;
 import com.wrq.entity.ProductCategory;
 import com.wrq.entity.ProductInfo;
 import com.wrq.service.CategoryService;
 import com.wrq.service.ProductService;
-import com.wrq.utils.ResponseCodeUtil;
 import com.wrq.vo.ProductInfoVo;
 import com.wrq.vo.ProductVo;
 import org.springframework.beans.BeanUtils;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by wangqian on 2019/1/26.
@@ -30,9 +28,12 @@ public class BuyerProductController {
     @Autowired
     private CategoryService categoryService;
 
-
+    /**
+     * 列出所有类目、类名、类别编号、此类下面的产品
+     * @return ProductVo
+     */
     @GetMapping("/list")
-    public ResponseCode list () {
+    public ServerResponse list () {
         // 1. 查询所有的上架商品
         List<ProductInfo> productInfoList = productService.findUpAll();
 
@@ -47,7 +48,7 @@ public class BuyerProductController {
 
         List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
 
-        // 3. 数据拼装出来 data对象
+        // 3. 数据拼装出来 data 对象
         List<ProductVo> productVoList = new ArrayList<>();
 
         for (ProductCategory productCategory : productCategoryList){
@@ -60,13 +61,13 @@ public class BuyerProductController {
             for (ProductInfo productInfo : productInfoList){
                 if ( productInfo.getCategoryType().equals(productCategory.getCategoryType()) ){
                     ProductInfoVo productInfoVo = new ProductInfoVo();
-//                    下面写法不优雅
+//                    下面写法不优雅:
 //                    productInfoVo.setProductId(productInfo.getProductId());
 //                    productInfoVo.setProductName(productInfo.getProductName());
 //                    productInfoVo.setProductPrice(productInfo.getProductPrice());
 //                    productInfoVo.setProductDescription(productInfo.getProductDescription());
 //                    productInfoVo.setProductIcon(productInfo.getProductIcon());
-//                    下面写法优雅
+//                    下面写法优雅:
                     BeanUtils.copyProperties(productInfo, productInfoVo);
                     productInfoVoList.add(productInfoVo);
                 }
@@ -76,6 +77,6 @@ public class BuyerProductController {
         }
 
         // 4. 响应
-        return ResponseCodeUtil.success(productVoList);
+        return ServerResponse.createBySuccess(productVoList);
     }
 }

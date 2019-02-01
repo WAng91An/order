@@ -1,4 +1,4 @@
-package com.wrq.common;
+package com.wrq.enums;
 
 import lombok.Getter;
 

@@ -1,6 +1,6 @@
 package com.wrq.service.impl;
 
-import com.wrq.common.ProductStatusEnum;
+import com.wrq.enums.ProductStatusEnum;
 import com.wrq.entity.ProductInfo;
 import com.wrq.repository.ProductInfoRepository;
 import com.wrq.service.ProductService;
