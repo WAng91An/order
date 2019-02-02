@@ -17,7 +17,7 @@ import java.util.Date;
 @Data
 @Entity
 @DynamicUpdate
-@Builder
+//@Builder
 public class OrderMaster {
 
     @Id

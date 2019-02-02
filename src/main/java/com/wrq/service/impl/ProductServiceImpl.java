@@ -1,18 +1,22 @@
 package com.wrq.service.impl;
 
+import com.wrq.dto.CartDto;
 import com.wrq.enums.ProductStatusEnum;
 import com.wrq.entity.ProductInfo;
+import com.wrq.enums.ResultEnum;
+import com.wrq.exception.SellException;
 import com.wrq.repository.ProductInfoRepository;
 import com.wrq.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * Created by wangqian on 2019/1/26.
+ * Created by wang qian on 2019/1/26.
  */
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -39,5 +43,31 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductInfo save(ProductInfo productInfo) {
         return productInfoRepository.save(productInfo);
+    }
+
+    @Override
+    @Transactional // 参数是集合，要么都成功，要么都不成功。
+    public void increaseStock(List<CartDto> cartDtoList) {
+
+    }
+
+    @Override
+    @Transactional // 参数是集合，要么都成功，要么都不成功。
+    public void decreaseStock(List<CartDto> cartDtoList) {
+        // 遍历CartDto
+        for ( CartDto cartDto : cartDtoList) {
+            ProductInfo product = productInfoRepository.findOne(cartDto.getProductId());
+            // CartDto中的id对应的商品不存在抛异常
+            if ( product == null ){
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+            }
+            Integer result = product.getProductStock() - cartDto.getProductQuantity();
+            // 库存不足，抛异常
+            if ( result < 0 ){
+                throw new SellException(ResultEnum.PRODUCT_STOCK_ERROR);
+            }
+            product.setProductStock(result);
+            productInfoRepository.save(product);
+        }
     }
 }

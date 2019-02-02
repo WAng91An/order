@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Entity
-@Builder
+//@Builder
 public class OrderDetail {
 
     /* 订单详情ID */
