@@ -48,7 +48,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional // 参数是集合，要么都成功，要么都不成功。
     public void increaseStock(List<CartDto> cartDtoList) {
-
+        for ( CartDto cartDto : cartDtoList) {
+            ProductInfo product = productInfoRepository.findOne(cartDto.getProductId());
+            if ( product == null ){
+                // 商品不存在，抛出异常
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+            }
+            Integer result = product.getProductStock() + cartDto.getProductQuantity();
+            product.setProductStock(result);
+            productInfoRepository.save(product);
+        }
     }
 
     @Override
