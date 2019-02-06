@@ -1,6 +1,5 @@
 package com.wrq.service.impl;
 
-import com.sun.xml.internal.txw2.annotation.XmlAttribute;
 import com.wrq.dto.OrderDto;
 import com.wrq.enums.ResultEnum;
 import com.wrq.exception.SellException;
