@@ -1,24 +1,13 @@
 package com.wrq.common;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wrq.enums.ResponseCode;
 
-import java.util.Date;
 
 /**
- *
  * Created by wangqian on 2019/1/28.
- *
- * 将该标记放在属性上，如果该属性为NULL则不参与序列化
- * 如果放在类上边,那对这个类的全部属性起作用
- * Include.Include.ALWAYS 默认*Include.NON_DEFAULT 属性为默认值不序列化
- * Include.NON_EMPTY 属性为 空（“”） 或者为 NULL 都不序列化
- * Include.NON_NULL 属性为NULL 不序列化
- *
  */
-
 public class ServerResponse {
 
     private int status;
@@ -56,11 +45,6 @@ public class ServerResponse {
     @JsonIgnore
     public boolean isSuccess() {
         return this.status == ResponseCode.SUCCESS.getCode();
-    }
-
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-    public Date getDate() {
-        return new Date();
     }
 
     public int getStatus() {

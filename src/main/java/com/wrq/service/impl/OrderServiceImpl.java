@@ -100,8 +100,8 @@ public class OrderServiceImpl implements OrderService {
         // 4. 写入订单数据库 OrderMaster
         OrderMaster orderMaster = new OrderMaster();
         // 拷贝的时候 null 值也会被拷贝，所以先拷贝再set。注意拷贝的时候产生的Bug，可以打断点试试
+        orderDto.setOrderId(orderId);
         BeanUtils.copyProperties(orderDto, orderMaster);
-        orderMaster.setOrderId(orderId);
         orderMaster.setOrderAmount(orderAmount);
         // orderMaster创建的时候会默认payStatus等为0，拷贝后会 0 -> null，但是我这里没有，如出现异常尝试打断点调试。
 
