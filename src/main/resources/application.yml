@@ -8,3 +8,11 @@ spring:
     show-sql: true
 server:
   context-path: /sell
+
+wechat:
+  mpAppId: xxxxxxxxxxx
+  mpAppSecret: XXXXX
+  mchId: 151515
+  mchKey: 15151515
+  keyPath: /var/wexxsdwd/
+  notifyUrl: https://www.xxxx.com/sell/pay/notify #异步的url
