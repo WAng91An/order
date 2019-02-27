@@ -14,5 +14,5 @@ wechat:
   mpAppSecret: XXXXX
   mchId: 151515
   mchKey: 15151515
-  keyPath: /var/wexxsdwd/
-  notifyUrl: https://www.xxxx.com/sell/pay/notify #异步的url
+  keyPath: /var/weixin_cert/apiclient_cert.p12 #这里填写我们下载下来的证书存放的位置,微信退款需要用到证书
+  notifyUrl: https://www.xxxx.com/sell/pay/notify #需要写处理 notify 请求的controller来处理异步通知

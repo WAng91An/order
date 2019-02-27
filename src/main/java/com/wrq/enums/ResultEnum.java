@@ -32,7 +32,9 @@ public enum ResultEnum {
 
     ORDER_OWNER_ERROR(20, "该订单不属于当前用户"),
 
-    WECHAT_MP_ERROR(21, "微信公众账号方面错误")
+    WECHAT_MP_ERROR(21, "微信公众账号方面错误"),
+
+    WXPAY_NOTIFY_MONEY_VERIFY_ERROR(22, "微信支付异步通知金额校验不通过")
     ;
 
     private Integer code;
