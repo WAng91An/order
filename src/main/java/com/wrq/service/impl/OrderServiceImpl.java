@@ -13,6 +13,7 @@ import com.wrq.exception.SellException;
 import com.wrq.repository.OrderDetailRepository;
 import com.wrq.repository.OrderMasterRepository;
 import com.wrq.service.OrderService;
+import com.wrq.service.PayService;
 import com.wrq.service.ProductService;
 import com.wrq.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+
+    @Autowired
+    private PayService payService;
 
     /**
      * 创建订单
@@ -200,7 +204,7 @@ public class OrderServiceImpl implements OrderService {
 
         // 如果已经支付，退款
         if ( orderDto.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode()) ){
-            // TODO: 2019/2/4
+            payService.refund(orderDto);
         }
         return orderDto;
     }

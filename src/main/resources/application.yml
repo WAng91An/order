@@ -10,8 +10,8 @@ server:
   context-path: /sell
 
 wechat:
-  mpAppId: xxxxxxxxxxx
-  mpAppSecret: XXXXX
+  mpAppId: wxdc42cb0d1f214624 #这是申请的测试账号的appid，自己公司服务号有这个信息
+  mpAppSecret: f06c09dc913e3a6a2eea0ef1d0f51110 #这是申请的测试账号的Secret，自己公司服务号有这个信息
   mchId: 151515
   mchKey: 15151515
   keyPath: /var/weixin_cert/apiclient_cert.p12 #这里填写我们下载下来的证书存放的位置,微信退款需要用到证书

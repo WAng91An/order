@@ -108,11 +108,11 @@ public class PayServiceImpl implements PayService {
         refundRequest.setOrderId(orderDto.getOrderId());
         refundRequest.setOrderAmount(orderDto.getOrderAmount().doubleValue());
 
-        log.info("[微信退款] refundRequest = {}", refundRequest);
+        log.info("[微信退款] refundRequest = {}", JsonUtil.toJson(refundRequest));
 
         RefundResponse response = bestPayService.refund(refundRequest);
 
-        log.info("[微信退款] response = {}", refundRequest);
+        log.info("[微信退款] response = {}", JsonUtil.toJson(refundRequest));
 
         return response;
     }

@@ -30,8 +30,8 @@ public class WechatController {
     @GetMapping("/authorize")
     public String authorize (@RequestParam("returnUrl") String returnUrl) {
 
-        String url = "https://xxx.com/wechat/authorize/userInfo";
-        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, URLEncoder.encode(returnUrl));
+        String url = "http://cja5at.natappfree.cc/sell/wechat/userInfo";
+        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_BASE, URLEncoder.encode(returnUrl));
 
         log.info("[微信网页授权] 获取code，redirectUrl = {}", redirectUrl);
 
@@ -43,8 +43,9 @@ public class WechatController {
     public String userInfo(@RequestParam("code") String code, @RequestParam("state") String returnUrl){
 
         // 用户请求此地址，会传递过来 code 和 state参数
-
+        log.info("[微信网页授权] 进入userInfo方法");
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = new WxMpOAuth2AccessToken();
+        log.info("[微信网页授权] 拿到的code = {} 和 returnUrl = {} ",code, returnUrl);
 
         try {
             wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
@@ -54,7 +55,7 @@ public class WechatController {
         }
 
         String openId = wxMpOAuth2AccessToken.getOpenId();
-
+        log.info("[微信网页授权] 获取openid = {} ",openId);
         return "redirect:" + returnUrl + "?openid=" + openId;
     }
 }
