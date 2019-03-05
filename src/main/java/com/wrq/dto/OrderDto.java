@@ -1,10 +1,12 @@
 package com.wrq.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.wrq.entity.OrderDetail;
 import com.wrq.enums.OrderStatusEnum;
 import com.wrq.enums.PayStatusEnum;
+import com.wrq.utils.EnumUtil;
 import com.wrq.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 
@@ -54,4 +56,16 @@ public class OrderDto {
     private Date updateTime;
 
     private List<OrderDetail> orderDetailList;
+
+    /* 根据当前的 orderStatus 数值获取对应的枚举，供前端使用 */
+    @JsonIgnore
+    public OrderStatusEnum getOrderStatusEnum(){
+        return EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);
+    }
+
+    /* 根据当前的 PayStatusEnum 数值获取对应的枚举，供前端使用 */
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum(){
+        return EnumUtil.getByCode(payStatus, PayStatusEnum.class);
+    }
 }

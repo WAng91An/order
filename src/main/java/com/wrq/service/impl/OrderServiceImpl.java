@@ -168,6 +168,19 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
+     * 查询所有的订单[分页]
+     * @param pageable
+     * @return
+     */
+    @Override
+    public Page<OrderDto> findList(Pageable pageable) {
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(pageable);
+        //  Page<OrderMaster>  ->  Page<OrderDto>
+        List<OrderDto> orderDtoList = OrderMaster2OrderDtoConvert.convert(orderMasterPage.getContent());
+        return new PageImpl<OrderDto>(orderDtoList, pageable, orderMasterPage.getTotalElements());
+    }
+
+    /**
      * 取消订单: 只有新订单才可以被取消,取消订单和完结订单状态都不可以取消
      * @param orderDto 被取消的订单：orderDto
      * @return 取消后返回 orderDto
