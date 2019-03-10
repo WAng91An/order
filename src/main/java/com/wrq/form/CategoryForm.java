@@ -3,8 +3,7 @@ package com.wrq.form;
 import lombok.Data;
 
 /**
- * Created by 廖师兄
- * 2017-07-23 21:43
+ * Created by wangqian
  */
 @Data
 public class CategoryForm {

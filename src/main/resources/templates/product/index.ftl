@@ -40,7 +40,7 @@
                                 <#list categoryList as category>
                                     <option value="${category.categoryType}"
                                             <#if (productInfo.categoryType)?? && productInfo.categoryType == category.categoryType>
-                                                selected
+                                               selected  <#--如果商品类目存在并且和分类中的类目相等，则出现:selected -->
                                             </#if>
                                         >${category.categoryName}
                                     </option>

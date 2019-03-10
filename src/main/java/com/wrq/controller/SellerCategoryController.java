@@ -1,6 +1,8 @@
 package com.wrq.controller;
 
 import com.wrq.entity.ProductCategory;
+import com.wrq.exception.SellException;
+import com.wrq.form.CategoryForm;
 import com.wrq.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,37 +57,37 @@ public class SellerCategoryController {
         return new ModelAndView("category/index", map);
     }
 
-//    /**
-//     * 保存/更新
-//     * @param form
-//     * @param bindingResult
-//     * @param map
-//     * @return
-//     */
-//    @PostMapping("/save")
-//    public ModelAndView save(@Valid CategoryForm form,
-//                             BindingResult bindingResult,
-//                             Map<String, Object> map) {
-//        if (bindingResult.hasErrors()) {
-//            map.put("msg", bindingResult.getFieldError().getDefaultMessage());
-//            map.put("url", "/sell/seller/category/index");
-//            return new ModelAndView("common/error", map);
-//        }
-//
-//        ProductCategory productCategory = new ProductCategory();
-//        try {
-//            if (form.getCategoryId() != null) {
-//                productCategory = categoryService.findOne(form.getCategoryId());
-//            }
-//            BeanUtils.copyProperties(form, productCategory);
-//            categoryService.save(productCategory);
-//        } catch (SellException e) {
-//            map.put("msg", e.getMessage());
-//            map.put("url", "/sell/seller/category/index");
-//            return new ModelAndView("common/error", map);
-//        }
-//
-//        map.put("url", "/sell/seller/category/list");
-//        return new ModelAndView("common/success", map);
-//    }
+    /**
+     * 保存/更新
+     * @param form
+     * @param bindingResult
+     * @param map
+     * @return
+     */
+    @PostMapping("/save")
+    public ModelAndView save(@Valid CategoryForm form,
+                             BindingResult bindingResult,
+                             Map<String, Object> map) {
+        if (bindingResult.hasErrors()) {
+            map.put("msg", bindingResult.getFieldError().getDefaultMessage());
+            map.put("url", "/sell/seller/category/index");
+            return new ModelAndView("common/error", map);
+        }
+
+        ProductCategory productCategory = new ProductCategory();
+        try {
+            if (form.getCategoryId() != null) {
+                productCategory = categoryService.findOne(form.getCategoryId());
+            }
+            BeanUtils.copyProperties(form, productCategory);
+            categoryService.save(productCategory);
+        } catch (SellException e) {
+            map.put("msg", e.getMessage());
+            map.put("url", "/sell/seller/category/index");
+            return new ModelAndView("common/error", map);
+        }
+
+        map.put("url", "/sell/seller/category/list");
+        return new ModelAndView("common/success", map);
+    }
 }
