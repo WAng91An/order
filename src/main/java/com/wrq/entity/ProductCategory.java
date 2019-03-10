@@ -30,4 +30,8 @@ public class ProductCategory {
     /* 分类编号 */
     private Integer categoryType;
 
+    private Date createTime;
+
+    private Date updateTime;
+
 }

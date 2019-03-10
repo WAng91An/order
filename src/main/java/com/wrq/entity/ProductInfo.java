@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wrq.enums.ProductStatusEnum;
 import com.wrq.utils.EnumUtil;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ import java.util.Date;
 @Entity
 @Data
 @DynamicUpdate
+@Slf4j
 public class ProductInfo {
 
     @Id
@@ -39,7 +41,7 @@ public class ProductInfo {
     private String productIcon;
 
     /* 状态 0：正常 1：下架 */
-    private Integer productStatus;
+    private Integer productStatus = ProductStatusEnum.UP.getCode();
 
     /* 类目编号 */
     private Integer categoryType;
@@ -50,6 +52,7 @@ public class ProductInfo {
 
     @JsonIgnore
     public ProductStatusEnum getProductStatusEnum(){
+        log.info("调用了 getProductStatusEnum 方法...");
         return EnumUtil.getByCode(productStatus, ProductStatusEnum.class);
     }
 }
